@@ -17,8 +17,8 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.MY_PRODUCTION_SECRET }}
         run: |
-          chmod +x scripts/verify-build-env.sh
-          ./scripts/verify-build-env.sh
+          chmod +x .github/scripts/verify-build-env.sh
+          .github/scripts/verify-build-env.sh
 
       - name: Run Standard Build
         run: |
